@@ -1,0 +1,62 @@
+body {
+    font-family: 'Comfortaa',
+        cursive;
+}
+
+.baymax {
+    border-bottom: 1em solid #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    transform: translate(-50%, -40%);
+}
+
+.baymax::before {
+    background: linear-gradient(to bottom, #efefef, #efefef 50%, #000 50%, #000);
+    background-position: 0 -100%;
+    background-size: 200% 200%;
+    /* background: #000; */
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    width: 9em;
+    height: 9em;
+    left: -7em;
+    top: -4em;
+    transform: skewX(-4deg);
+    animation: blink 3s infinite;
+}
+
+.baymax::after {
+    background: linear-gradient(to bottom, #efefef, #efefef 50%, #000 50%, #000);
+    background-position: 0 -100%;
+    background-size: 200% 200%;
+    /* background: #000; */
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    width: 9em;
+    height: 9em;
+    right: -7em;
+    top: -4em;
+    transform: skewX(4deg);
+    animation: blink 3s 0.1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        background-position: 0 100%;
+    }
+
+    85%,
+    95% {
+        background-position: 0 50%;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
