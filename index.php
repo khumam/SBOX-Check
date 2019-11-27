@@ -40,6 +40,25 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let batas = 2;
+
+            $('#hex').keyup(function(index) {
+                let stringAkhir = '';
+                let string = $(this).val();
+                let totalString = string.length;
+
+                stringAkhir = string.substring(0, batas);
+                $('#hex').val(stringAkhir);
+
+                if (!string.match(/^[a-f]*$/) && !string.match(/^[0-9]*$/)) {
+                    alert("Hanya bilangan Hexa");
+                    $('#hex').val('');
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>
