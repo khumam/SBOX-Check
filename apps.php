@@ -62,6 +62,7 @@ function toBinArray($string)
     $arrayBin = str_split($bin);
     $arrayBin = array_reverse($arrayBin);
     $count = strlen($bin);
+    $result = [];
     for ($i = 0; $i < $count; $i++) {
         if ($arrayBin[$i] == 1) {
             $result[] = $i;
@@ -94,4 +95,50 @@ function shiftRight($modulo, $xorResult)
     $shift = strlen($modulo) - strlen($xorResult);
     $newMod = bindec($modulo) >> $shift;
     return decbin($newMod);
+}
+
+
+function affine($hex, $const, $affineTable)
+{
+
+    // $affineTable = [
+    //     [1, 0, 0, 0, 1, 1, 1, 1],
+    //     [1, 1, 0, 0, 0, 1, 1, 1],
+    //     [1, 1, 1, 0, 0, 0, 1, 1],
+    //     [1, 1, 1, 1, 0, 0, 0, 1],
+    //     [1, 1, 1, 1, 1, 0, 0, 0],
+    //     [0, 1, 1, 1, 1, 1, 0, 0],
+    //     [0, 0, 1, 1, 1, 1, 1, 0],
+    //     [0, 0, 0, 1, 1, 1, 1, 1]
+    // ];
+
+    $hexArray = array_reverse(str_split($hex));
+    $multipleResult = [0, 0, 0, 0, 0, 0, 0, 0];
+    $finalResult = [0, 0, 0, 0, 0, 0, 0, 0];
+    // $addition = [1, 1, 0, 0, 0, 1, 1, 0];
+    $addition = $const;
+
+    for ($i = 0; $i < 8; $i++) {
+        for ($j = 0; $j < 8; $j++) {
+            $multipleResult[$i] += $affineTable[$i][$j] * $hexArray[$j];
+        }
+    }
+    for ($k = 0; $k < 8; $k++) {
+        $finalResult[$k] = ($multipleResult[$k] + $addition[$k]) % 2;
+    }
+    return implode(array_reverse($finalResult));
+}
+
+function toBinSbox($hex)
+{
+    $hex = trim($hex);
+    $bin = sprintf("%08d", decbin(hexdec($hex)));
+    return $bin;
+}
+
+function toHexSbox($bin)
+{
+    $bin = trim($bin);
+    $hex = dechex(bindec($bin));
+    return $hex;
 }

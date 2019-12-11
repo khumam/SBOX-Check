@@ -10,29 +10,48 @@ session_start(); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-    <title>Result S-BOX</title>
+    <title>Hasil Invers</title>
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="baymax"></div>
-        <div class="row mt-5 text-center">
-            <div class=" col-sm-3"></div>
-            <div class="col-sm-6">
-                <h6 style="color:#b0b0b0;">Hasil S-Box nya</h6>
-                <h2 style="color:#b0b0b0;"><?php echo $_SESSION['result'] ?></h2>
-                <p>Waktu eksekusi <?php echo $_SESSION['time']; ?> s</p>
-                <a href="index.php" class="btn btn-danger">Kembali</a>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Hasil Invers</h4>
+                    <div class="table-responsive">
+                        <?php
+                        echo "<table class='table table-bordered'>";
+                        for ($p = 0; $p < 256; $p++) {
+                            if ($p % 16 == 0) {
+                                echo "<tr>";
+                            }
+                            echo "<td>" . $_SESSION['invers'][$p][0] . "</td>";
+                        }
+                        echo "</table>";
+                        ?>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>Hasil Sbox</h4>
+                    <div class="table-responsive">
+                        <?php
+                        echo "<table class='table table-bordered'>";
+                        for ($p = 0; $p < 256; $p++) {
+                            if ($p % 16 == 0) {
+                                echo "<tr>";
+                            }
+                            echo "<td>" . $_SESSION['sbox'][$p][0] . "</td>";
+                        }
+                        echo "</table>";
+                        ?>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-3"></div>
-        </div>
+    </section>
+
+
     </div>
-
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
